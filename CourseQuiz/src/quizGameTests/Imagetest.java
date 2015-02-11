@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import quizGame.Image;
 import quizGame.ImageItem;
-import quizGame.QuizItem;
-
 import org.junit.Test;
 
 public class Imagetest {
@@ -21,14 +19,14 @@ public class Imagetest {
 	}
 	
 	@Test
-	public void buildQuizListTest() throws IOException {
+	public void buildImageItemListTest() throws IOException {
 		Image test = new Image("testmodule");
+		test.buildImageItemList();
 		ArrayList<ImageItem> testitems = new ArrayList<ImageItem>();
 		testitems.add(new ImageItem("ulna"));
 		testitems.add(new ImageItem("radius"));
 		testitems.add(new ImageItem("phalange"));
-
-		assertTrue(testitems.equals(test.buildQuizList()));
+		assertEquals(test.getNextQuizItem().getQuizItem().getName(), "ulna");
 	}
 	
 	@Test
@@ -41,9 +39,20 @@ public class Imagetest {
 	}
 	
 	@Test
-	public void getNextItemTest() {
+	public void getNextItemTest() throws IOException {
 		Image test = new Image("testmodule");
+		assertEquals(test.getNextQuizItem().getQuizItem().getName(), "ulna");
+		assertEquals(test.getNextQuizItem().getQuizItem().getName(), "Radius");
+		assertEquals(test.getNextQuizItem().getQuizItem().getName(), "phalange");
 		
+	}
+	
+	@Test
+	public void getPreviousItemTest() throws IOException {
+		Image test = new Image("testmodule");
+		assertEquals(test.getPreviousQuizItem().getQuizItem().getName(), "phalange");
+		assertEquals(test.getPreviousQuizItem().getQuizItem().getName(), "Radius");
+		assertEquals(test.getPreviousQuizItem().getQuizItem().getName(), "ulna");
 	}
 
 }

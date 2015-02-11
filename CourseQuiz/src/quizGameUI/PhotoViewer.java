@@ -3,12 +3,14 @@ package quizGameUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import quizGame.Image;
 import quizGame.QuizItem;
 
 
@@ -22,7 +24,8 @@ public class PhotoViewer extends JFrame
 	private static final String TITLE = "PhotoViewer";
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 800;
-	private QuizItem testitem = new QuizItem();
+	private Image image;
+	private String imageString;
 	
 	
 	/*
@@ -30,9 +33,10 @@ public class PhotoViewer extends JFrame
 	 * Modifies: this
 	 * Effects:  initializes application's main window and displays photo
 	 */
-	public PhotoViewer()
+	public PhotoViewer() throws IOException
 	{
-		testitem.setImage("test.jpg");
+		image = new Image("testmodule");
+		imageString = image.getImageName();
 		this.setSize(WIDTH,HEIGHT);
 		this.setTitle(TITLE);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,7 +44,7 @@ public class PhotoViewer extends JFrame
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		
-		ImageIcon icon = new ImageIcon(testitem.getImage());
+		ImageIcon icon = new ImageIcon("/home/master/ulna.jpg");
 		JLabel label = new JLabel();
 		label.setIcon(icon);
 		panel.add(label);
@@ -57,7 +61,7 @@ public class PhotoViewer extends JFrame
 	/*
 	 * Instantiates photo viewer.
 	 */
-	public static void main (String[] args) 
+	public static void main (String[] args) throws IOException 
 	{
 		new PhotoViewer();
 	} 

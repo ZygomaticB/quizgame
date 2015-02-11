@@ -12,7 +12,7 @@ public class Readtest {
 
 	@Test
 	public void get1stLinetest() throws FileNotFoundException {
-		assertEquals(Read.getName("/home/master/java/git/CourseQuiz/testmodule/radius.qi"), "Radius");
+		assertEquals(Read.firstLine("/home/master/java/git/CourseQuiz/testmodule/radius.qi"), "Radius");
 	}
 
 }

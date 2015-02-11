@@ -11,6 +11,7 @@ public class ImageItem {
 	
 	public ImageItem (String name) {
 		quizItem = new QuizItem(name);
+		point = new Point(0,0);
 	}
 	
 	public ImageItem (String name, int x, int y) {
@@ -30,13 +31,12 @@ public class ImageItem {
 		this.quizItem = quizitem;
 	}
 	
-	public void setPoint(int x, int y) {
-		//point = point.setX(x);
-		//point = point.setY(y);
-	}
-	
 	public QuizItem getQuizItem() {
 		return quizItem;
+	}
+	
+	public void setPoint(int x, int y) {
+		point = new Point(x, y);
 	}
 	
 	public Point getPoint() {

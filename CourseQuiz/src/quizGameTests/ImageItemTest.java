@@ -22,7 +22,7 @@ public class ImageItemTest {
 		assertTrue(testItem2 instanceof ImageItem);
 		
 		//path constructor test
-		QuizItem ulna = new QuizItem("Ulna");
+		QuizItem ulna = new QuizItem("ulna");
 		//Really need to figure out how to make the path relative...
 		Path testPath = Paths.get("/home/master/java/git/CourseQuiz/testmodule/ulna.qi");
 		ImageItem testItem3 = new ImageItem(testPath);
@@ -43,6 +43,16 @@ public class ImageItemTest {
 		ImageItem testItem = new ImageItem("name");
 		testItem.setQuizItem(mandible);
 		assertEquals(testItem.getQuizItem(), mandible);
+	}
+	
+	@Test
+	public void setPointTest() {
+		ImageItem testItem = new ImageItem("Ulna", 20, 30);
+		assertTrue(testItem.getPoint().getX() == 20);
+		assertTrue(testItem.getPoint().getY() == 30);
+		testItem.setPoint(100, 120);
+		assertTrue(testItem.getPoint().getX() == 100);
+		assertTrue(testItem.getPoint().getY() == 120);
 	}
 
 }

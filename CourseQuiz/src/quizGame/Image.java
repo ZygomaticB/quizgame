@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Image {
-	
+	// TODO change it so that this is not named Image, nor does it get a module name...
 	private String moduleName;
 	private String textfilename;
 	private String imagename;
@@ -22,36 +22,28 @@ public class Image {
 	private int currentItem;
 	
 	// Requires: filename exists in the directorytree in the right place
-	// Modifes: textfile, imagename, quizitems, currentitem
+	// Modifes: textfile, imagename, imageitems, currentitem
 	// Effects: construct imageobject for a given filename
-	public Image(String module) {
+	public Image(String module) throws IOException {
 		this.moduleName = module;
 		this.currentItem = 0;
 		this.imageItems = new ArrayList<ImageItem>();
+		buildImageItemList();
+		imagename = imageItems.get(0).getQuizItem().getName() + ".jpg";
 	}
 	
 	// Requires: filename.qi file exists
-	// Modifes: quizitems
+	// Modifes: imageItems
 	// Effects: build a list of quiz items from the given text file by parsing each line
 	//          separate at semicolons
-	public ArrayList<ImageItem> buildQuizList() throws IOException {
+	public ArrayList<ImageItem> buildImageItemList() throws IOException {
 		Path currentModule = getModuleDir();
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(currentModule)) {
+		DirectoryStream<Path> stream = Files.newDirectoryStream(currentModule);
 		    for (Path file: stream) {
 		    	Path filename= currentModule.resolve(file);
 		    	imageItems.add(new ImageItem(filename));
 		    }
-		} catch (IOException | DirectoryIteratorException x) {
-		    // IOException can never be thrown by the iteration.
-		    // In this snippet, it can only be thrown by newDirectoryStream.
-		    System.err.println(x);
-		}
 		return imageItems;
-	}
-	
-	public QuizItem buildQuizItem(String filename) throws FileNotFoundException, IOException {
-		Path currentModule = getModuleDir();
-
 	}
 	
 	public Path getModuleDir() throws IOException {
@@ -68,7 +60,7 @@ public class Image {
 	// Modifies: this
 	// Effects: set the filename to be newName
 	public void setFileName(String newName){
-		filename = newName;
+		textfilename = newName;
 	}
 	
 	//Effects: return the imagename
@@ -88,16 +80,29 @@ public class Image {
 	// Requires: quizitems is not empty
 	// Modifies: currentItem
 	// Effects: gets the next quiz item in the list, adds 1 to currentItem
-	public QuizItem getNextQuizItem() {
-		return null;
+	public ImageItem getNextQuizItem() {
+		ImageItem returnItem = imageItems.get(currentItem);
+		if (currentItem < imageItems.size()) {
+			currentItem += 1;
+		}
+		return returnItem;
 	}
 	
 	// Requires: quizitems is not empty
 	// Modifies: currentItem
 	// Effects: returns the previous quiz item, if currentItem is 1st in list, return the last item
 	//          reduces currentitem by 1 if currentitem > 0
-	public QuizItem getPreviousQuizItem() {
-		return null;
+	public ImageItem getPreviousQuizItem() {
+		ImageItem returnItem;
+		if (currentItem > 0) {
+			returnItem = imageItems.get(currentItem - 1);
+			currentItem -= 1;
+			return returnItem;
+		}
+		else
+			currentItem = imageItems.size() - 1;
+			returnItem = imageItems.get(currentItem);
+		return returnItem;
 	}
 	
 	// Requires: quizitems is >1 long
