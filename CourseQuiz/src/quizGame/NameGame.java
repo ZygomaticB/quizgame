@@ -32,7 +32,7 @@ public class NameGame {
 	}
 	
 	public String getPhoto() {
-		
+		return "";
 	}
 	
 }
