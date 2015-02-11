@@ -5,11 +5,16 @@ public class QuizItem {
 	private String name;
 	private Point point;
 	
+	public QuizItem(String name) {
+		this.name = name;
+	}
+	
 	// Constructor for QuizItem
 	public QuizItem(String name, int x, int y) {
 		this.name = name;
 		this.point = new Point(x, y); 
 	}
+	
 	// Effects: returns the name of the quiz item
 	public String getName() {
 		return "";

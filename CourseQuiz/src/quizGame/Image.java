@@ -1,45 +1,74 @@
 package quizGame;
 
 import java.util.ArrayList;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Image {
 	
-	private String filename;
+	private String moduleName;
 	private String textfilename;
 	private String imagename;
-	private ArrayList<QuizItem> quizitems;
+	private ArrayList<ImageItem> imageItems;
 	private int currentItem;
 	
 	// Requires: filename exists in the directorytree in the right place
 	// Modifes: textfile, imagename, quizitems, currentitem
 	// Effects: construct imageobject for a given filename
-	public Image(String filename) {
-		this.filename = filename;
-		this.textfilename = filename + ".qi";
-		this.imagename = filename + ".jpg";
+	public Image(String module) {
+		this.moduleName = module;
 		this.currentItem = 0;
-		this.quizitems = buildQuizList(textfilename);
-		// TODO figure out how to parse a textfile to create quizitems
-				
+		this.imageItems = new ArrayList<ImageItem>();
 	}
 	
 	// Requires: filename.qi file exists
 	// Modifes: quizitems
 	// Effects: build a list of quiz items from the given text file by parsing each line
 	//          separate at semicolons
-	public ArrayList<QuizItem> buildQuizList(String textfile) {
-		return null;
+	public ArrayList<ImageItem> buildQuizList() throws IOException {
+		Path currentModule = getModuleDir();
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(currentModule)) {
+		    for (Path file: stream) {
+		    	Path filename= currentModule.resolve(file);
+		    	imageItems.add(new ImageItem(filename));
+		    }
+		} catch (IOException | DirectoryIteratorException x) {
+		    // IOException can never be thrown by the iteration.
+		    // In this snippet, it can only be thrown by newDirectoryStream.
+		    System.err.println(x);
+		}
+		return imageItems;
+	}
+	
+	public QuizItem buildQuizItem(String filename) throws FileNotFoundException, IOException {
+		Path currentModule = getModuleDir();
+
+	}
+	
+	public Path getModuleDir() throws IOException {
+		String modulePath = "./" + moduleName;
+		Path moduleDir = Paths.get(modulePath);
+		return moduleDir.toRealPath();
 	}
 	
 	// Effects: return the filename of the image
-	public String getFileName() {
-		return this.filename;
+	public String getModuleName() {
+		return moduleName;
 	}
 	
 	// Modifies: this
 	// Effects: set the filename to be newName
 	public void setFileName(String newName){
-		this.filename = newName;
+		filename = newName;
 	}
 	
 	//Effects: return the imagename
