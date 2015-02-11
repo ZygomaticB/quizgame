@@ -1,6 +1,7 @@
 package quizGame;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.Properties;
 
@@ -17,16 +18,16 @@ public class ImageItem {
 		point = new Point(x, y);
 	}
 	
-	public ImageItem(Path p) {
+	public ImageItem(Path p) throws FileNotFoundException {
 		String fileName = p.toString();
-		String quizItemName = Read.getName(fileName);
+		String quizItemName = Read.firstLine(fileName);
 		quizItem = new QuizItem(quizItemName);
 		point = new Point(0, 0);
 		
 	}
 	
-	public void setQuizItem(String name) {
-		quizItem = new QuizItem(name);
+	public void setQuizItem(QuizItem quizitem) {
+		this.quizItem = quizitem;
 	}
 	
 	public void setPoint(int x, int y) {

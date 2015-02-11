@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class Read {
 	
-	public static String getName(String filename) throws FileNotFoundException {
+	public static String firstLine(String filename) throws FileNotFoundException {
 		BufferedReader bf = new BufferedReader(new FileReader(filename));
 		String line = "";
 		for (int i=0; i < 1; i++)
