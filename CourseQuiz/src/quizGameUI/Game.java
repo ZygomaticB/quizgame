@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,16 +31,18 @@ public class Game extends JFrame {
 	private Image image;
 	private JButton button; 
 	private JPanel mainMenu; 
-	private JPanel controlViewer; 
 	private ModuleMenu moduleMenu; 
 	private QuizGameModel model;
 	private JPanel contentPanel; 
+	private JButton mainMenuButton; 
+	private QuizQuestionUI quiz; 
 	
 	//array to test building the layout. 
 	String [] modules = {"Bio", "Chem", "Math"}; 
 	
 	private final String MAIN_MENU = "Main Menu"; 
 	private final String MODULE_OPTIONS = "Module Options"; 
+	private final String QUIZ_QUESTIONS = "Quiz Questions"; 
 	
 	public Game(String moduleName, QuizGameModel model) throws IOException {
 		
@@ -55,23 +59,36 @@ public class Game extends JFrame {
 
 		mainMenu = new JPanel(); 
 		mainMenu.setLayout(new BoxLayout(mainMenu, BoxLayout.Y_AXIS));
-		mainMenu.setBackground(Color.RED);
-		controlViewer = new ModuleMenu("Testing"); 
-		controlViewer.setLayout(new BoxLayout(controlViewer, BoxLayout.Y_AXIS));
-		controlViewer.setBackground(Color.BLUE);
+		moduleMenu = new ModuleMenu("Testing", model, this); 
+		moduleMenu.setLayout(new BoxLayout(moduleMenu, BoxLayout.Y_AXIS));
 		
 		moduleViewBuilder(mainMenu);
-		controlViewBuilder(controlViewer);
+		controlViewBuilder(moduleMenu);
+		
+		quiz = new QuizQuestionUI("QUIZ!"); 
 		
 		contentPanel.add(mainMenu, model.MAIN_MENU);
-		contentPanel.add(controlViewer, model.MODULE_OPTIONS);
+		contentPanel.add(moduleMenu, model.MODULE_OPTIONS);
+		contentPanel.add(quiz, QUIZ_QUESTIONS);
 		
 		ImageIcon icon = new ImageIcon(image.getImageName());
 		JLabel label = new JLabel();
 		label.setIcon(icon);
 		//panel.add(label);
 		this.add(contentPanel);
-		this.add(label); 
+		//this.add(label); 
+		
+		mainMenuButton = new JButton("Return To Main Menu"); 
+		mainMenuButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardLayout layout = (CardLayout) contentPanel.getLayout(); 
+				layout.show(contentPanel, MAIN_MENU);
+			}
+		});
+		
+		this.add(mainMenuButton); 
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = screenSize.width/2 - this.getWidth()/2;
@@ -114,6 +131,10 @@ public class Game extends JFrame {
 
 	public void setCurrentView(JPanel currentView) {
 		this.mainMenu = currentView;
+	}
+	
+	public ModuleMenu getModuleMenu(){
+		return this.moduleMenu; 
 	}
 	
 	public static void main(String[] args) throws IOException {

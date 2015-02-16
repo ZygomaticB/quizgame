@@ -6,6 +6,7 @@ public class QuizGameModel {
 	
 	public final String MAIN_MENU = "Main Menu"; 
 	public final String MODULE_OPTIONS = "Module Options"; 
+	public final String QUIZ_QUESTIONS = "Quiz Questions";
 	
 	private ArrayList<ListModule> modules; 
 	private String state; 

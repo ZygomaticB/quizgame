@@ -17,6 +17,8 @@ public class ModuleSelectionActionListener implements ActionListener {
 
 	private QuizGameModel model; 
 	private Game view; 
+	String [] modules = {"Update 1", "Update 2", "Update 3"};
+	
 	
 	public ModuleSelectionActionListener(QuizGameModel model, Game view){
 		this.model = model; 
@@ -28,9 +30,15 @@ public class ModuleSelectionActionListener implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
-		JPanel panel = view.getContectPanel(); 
+		JPanel panel = view.getContectPanel();
+		ModuleMenu menu = view.getModuleMenu();
+		menu.refreshMenu(modules, button.getText()); 
+		//update the view for dislay
+		menu.revalidate();
+		menu.repaint();	
+		//switch to this card. 
 		CardLayout layout = (CardLayout) panel.getLayout(); 
-		layout.show(panel, model.MODULE_OPTIONS);		
+		layout.show(panel, model.MODULE_OPTIONS);
 	}
 
 }
