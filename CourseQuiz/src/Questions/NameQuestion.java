@@ -1,11 +1,10 @@
 package Questions;
 
-import quizGame.QuizItem;
 
 public class NameQuestion extends Question {
 
-	NameQuestion(QuizItem q) {
-		this.answer = q.getName();
+	public NameQuestion(String name) {
+		this.answer = name;
 	}
 
 	@Override

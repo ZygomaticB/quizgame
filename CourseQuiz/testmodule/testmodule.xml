@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="testmodule">
+	<Item_1>
+		<ItemName>Radius</ItemName>
+		<ImageName>radius.jpg</ImageName>
+	</Item_1>
+	<Item_2>
+		<ItemName>Ulna</ItemName>
+		<ImageName>ulna.jpg</ImageName>
+	</Item_2>
+	<Item_3>
+		<ItemName>phalange</ItemName>
+		<ImageName>phalange.jpg</ImageName>
+	</Item_3>
+</module>
