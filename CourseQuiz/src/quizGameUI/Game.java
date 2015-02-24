@@ -48,7 +48,7 @@ public class Game extends JFrame {
 		
 		//set the frame to have the quizGameModel
 		this.model = model; 
-		image = new Image(moduleName);
+		//image = new Image(moduleName);
 		this.setLayout(new GridLayout(1, 2));
 		this.setSize(WIDTH,HEIGHT);
 		this.setTitle("Game");
@@ -71,7 +71,7 @@ public class Game extends JFrame {
 		contentPanel.add(moduleMenu, model.MODULE_OPTIONS);
 		contentPanel.add(quiz, QUIZ_QUESTIONS);
 		
-		ImageIcon icon = new ImageIcon(image.getImageName());
+		ImageIcon icon = new ImageIcon("Test");
 		JLabel label = new JLabel();
 		label.setIcon(icon);
 		//panel.add(label);
@@ -109,12 +109,12 @@ public class Game extends JFrame {
 		JLabel title = new JLabel("Availible Modules For Testing");
 		mainMenu.add(title);
 		//get the modules to get the names to display. 
-		ArrayList<ListModule> modules = this.model.getModules(); 
-		Iterator<ListModule> moduleIt = modules.iterator(); 
+		ArrayList<String> modules = this.model.getModules(); 
+		Iterator<String> moduleIt = modules.iterator(); 
 		//iterate through the modules to grab and generate titles. 
 		while(moduleIt.hasNext()){
-			ListModule module = moduleIt.next(); 
-			button = new JButton(module.getName()); 
+			String module = moduleIt.next(); 
+			button = new JButton(module); 
 			button.setMaximumSize(new Dimension(400,50));
 			button.addActionListener(new ModuleSelectionActionListener(model, this));
 			mainMenu.add(button); 

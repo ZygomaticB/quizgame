@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Animals>
+	<Item_1>
+		<ItemName>Bear</ItemName>
+		<ImageName>bear.jpg</ImageName>
+	</Item_1>
+	<Item_2>
+		<ItemName>Mammoth</ItemName>
+		<ImageName>mammoth.jpg</ImageName>
+	</Item_2>
+	<Item_3>
+		<ItemName>Marmot</ItemName>
+		<ImageName>marmot.jpg</ImageName>
+	</Item_3>
+</Animals>

@@ -8,14 +8,14 @@ public class QuizGameModel {
 	public final String MODULE_OPTIONS = "Module Options"; 
 	public final String QUIZ_QUESTIONS = "Quiz Questions";
 	
-	private ArrayList<ListModule> modules; 
+	private ArrayList<String> modules; 
 	private String state; 
 	
 	public QuizGameModel(){
 		//modules = getListModules;
 		this.state = MAIN_MENU; 
 		//for testing, generate some default Modules
-		modules = new ArrayList<ListModule>(); 
+		modules = new ArrayList<String>(); 
 		getModulesFromFile(); 
 		
 	}
@@ -30,16 +30,15 @@ public class QuizGameModel {
 
 	//TODO read from the file to get the modules that are availible. 
 	public void getModulesFromFile(){
-		modules.add(new ListModule("Bio")); 
-		modules.add(new ListModule("Math")); 
-		modules.add(new ListModule("Science")); 
+		modules.add("anatomy"); 
+		modules.add("biology");
 	}
 	
-	public ArrayList<ListModule> getModules() {
+	public ArrayList<String> getModules() {
 		return modules;
 	}
 
-	public void setModules(ArrayList<ListModule> modules) {
+	public void setModules(ArrayList<String> modules) {
 		this.modules = modules;
 	}
 }
