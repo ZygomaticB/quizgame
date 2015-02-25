@@ -28,7 +28,7 @@ import quizGame.QuizGameModel;
 public class Game extends JFrame {
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
-	private Image image;
+	//private Image image;
 	private JButton button; 
 	private JPanel mainMenu; 
 	private ModuleMenu moduleMenu; 
@@ -37,18 +37,14 @@ public class Game extends JFrame {
 	private JButton mainMenuButton; 
 	private QuizQuestionUI quiz; 
 	
-	//array to test building the layout. 
-	String [] modules = {"Bio", "Chem", "Math"}; 
-	
 	private final String MAIN_MENU = "Main Menu"; 
 	private final String MODULE_OPTIONS = "Module Options"; 
 	private final String QUIZ_QUESTIONS = "Quiz Questions"; 
 	
-	public Game(String moduleName, QuizGameModel model) throws IOException {
+	public Game(QuizGameModel model) throws IOException {
 		
 		//set the frame to have the quizGameModel
 		this.model = model; 
-		//image = new Image(moduleName);
 		this.setLayout(new GridLayout(1, 2));
 		this.setSize(WIDTH,HEIGHT);
 		this.setTitle("Game");
@@ -141,7 +137,7 @@ public class Game extends JFrame {
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				try {
-					new Game("testmodule", new QuizGameModel());
+					new Game(new QuizGameModel());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

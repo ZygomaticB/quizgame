@@ -1,5 +1,10 @@
 package quizGame;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class QuizGameModel {
@@ -17,7 +22,6 @@ public class QuizGameModel {
 		//for testing, generate some default Modules
 		modules = new ArrayList<String>(); 
 		getModulesFromFile(); 
-		
 	}
 
 	public String getState() {
@@ -28,10 +32,15 @@ public class QuizGameModel {
 		this.state = state;
 	}
 
-	//TODO read from the file to get the modules that are availible. 
-	public void getModulesFromFile(){
-		modules.add("anatomy"); 
-		modules.add("biology");
+	public void getModulesFromFile() {
+		try {
+			DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("modules"));
+			for (Path file : stream) {
+				modules.add(file.subpath(1, 2).toString());
+			}
+		} catch (IOException e) {
+			modules.add("something went wrong");
+		}
 	}
 	
 	public ArrayList<String> getModules() {
