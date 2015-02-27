@@ -4,10 +4,14 @@ import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import org.jdom2.JDOMException;
 
 import quizGame.QuizGameModel;
 import quizGameUI.Game;
@@ -17,12 +21,13 @@ public class ModuleSelectionActionListener implements ActionListener {
 
 	private QuizGameModel model; 
 	private Game view; 
-	String [] modules = {"Update 1", "Update 2", "Update 3"};
+	ArrayList<String> modules;
 	
 	
-	public ModuleSelectionActionListener(QuizGameModel model, Game view){
+	public ModuleSelectionActionListener(QuizGameModel model, Game view) throws JDOMException, IOException{
 		this.model = model; 
-		this.view = view; 
+		this.view = view;
+		modules = new QuestionsUploader("modules/anatomy/anatomy.xml").getQuestionTypes();
 	}
 	
 	/* When a module button is pressed, update to a new view and

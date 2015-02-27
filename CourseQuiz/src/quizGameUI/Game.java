@@ -20,9 +20,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.jdom2.JDOMException;
+
 import quiz.game.controller.ModuleSelectionActionListener;
 import quizGame.Image;
-import quizGame.ListModule;
 import quizGame.QuizGameModel;
 
 public class Game extends JFrame {
@@ -41,7 +42,7 @@ public class Game extends JFrame {
 	private final String MODULE_OPTIONS = "Module Options"; 
 	private final String QUIZ_QUESTIONS = "Quiz Questions"; 
 	
-	public Game(QuizGameModel model) throws IOException {
+	public Game(QuizGameModel model) throws IOException, JDOMException {
 		
 		//set the frame to have the quizGameModel
 		this.model = model; 
@@ -100,7 +101,7 @@ public class Game extends JFrame {
 	}
 	
 	//builds the module viewer frame to contain all the modules 
-	private void moduleViewBuilder(JPanel moduleView){
+	private void moduleViewBuilder(JPanel moduleView) throws JDOMException, IOException{
 
 		JLabel title = new JLabel("Availible Modules For Testing");
 		mainMenu.add(title);
@@ -139,6 +140,9 @@ public class Game extends JFrame {
 				try {
 					new Game(new QuizGameModel());
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JDOMException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

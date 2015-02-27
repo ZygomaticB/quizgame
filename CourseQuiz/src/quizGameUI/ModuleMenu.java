@@ -1,6 +1,7 @@
 package quizGameUI;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,7 +19,8 @@ public class ModuleMenu extends JPanel {
 	private Game view; 
 	
 	//array to test building the layout. 
-	String [] modules = {"Type 1", "Type 2", "Type 3"}; 
+	
+	ArrayList<String> modules = new ArrayList<String>();
 	
 	public ModuleMenu(String moduleName, QuizGameModel model, Game view){
 		this.model = model; 
@@ -29,7 +31,7 @@ public class ModuleMenu extends JPanel {
 		addButtons(modules); 
 	}
 	
-	public ModuleMenu(String moduleName, String [] modulesOptions,  QuizGameModel model, Game view){
+	public ModuleMenu(String moduleName, ArrayList<String> modulesOptions,  QuizGameModel model, Game view){
 		this.model = model; 
 		this.view = view;
 		JLabel title = new JLabel(moduleName); 
@@ -37,18 +39,18 @@ public class ModuleMenu extends JPanel {
 		addButtons(modulesOptions); 
 	}
 	
-	public void addButtons(String [] modules){
-		for(int i = 0; i<modules.length; i++)
+	public void addButtons(ArrayList<String> modules){
+		for(int i = 0; i<modules.size(); i++)
 		{
-			button = new JButton(modules[i]); 
+			button = new JButton(modules.get(i)); 
 			button.setMaximumSize(new Dimension(400,50));
 			button.addActionListener(new ModuleMenuActionListener(model, view));
 			this.add(button); 
-			System.out.println(modules[i]);
+			System.out.println(modules.get(i));
 		}
 	}
 	
-	public void refreshMenu(String [] modules, String title){
+	public void refreshMenu(ArrayList<String> modules, String title){
 		this.removeAll();
 		JLabel label = new JLabel(title); 
 		this.add(label); 
