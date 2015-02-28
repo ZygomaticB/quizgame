@@ -24,10 +24,10 @@ public class ModuleSelectionActionListener implements ActionListener {
 	ArrayList<String> modules;
 	
 	
-	public ModuleSelectionActionListener(QuizGameModel model, Game view) throws JDOMException, IOException{
+	public ModuleSelectionActionListener(QuizGameModel model, Game view, String module) throws JDOMException, IOException{
 		this.model = model; 
 		this.view = view;
-		modules = new QuestionsUploader("modules/anatomy/anatomy.xml").getQuestionTypes();
+		modules = new QuestionsUploader("modules/" + module + "/" + module + ".xml").getQuestionTypes();
 	}
 	
 	/* When a module button is pressed, update to a new view and

@@ -113,7 +113,7 @@ public class Game extends JFrame {
 			String module = moduleIt.next(); 
 			button = new JButton(module); 
 			button.setMaximumSize(new Dimension(400,50));
-			button.addActionListener(new ModuleSelectionActionListener(model, this));
+			button.addActionListener(new ModuleSelectionActionListener(model, this, module));
 			mainMenu.add(button); 
 		}
 	}

@@ -35,6 +35,9 @@ public class QuizQuestionUI extends JPanel {
 				answerQuestion();
 			}
 		});
+		JTextField question = new JTextField("What is the name of this?");
+		
+		this.add(question);
 		this.add(answerbox);
 	}
 	private void answerQuestion() {
